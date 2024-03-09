@@ -115,11 +115,28 @@
             else if (colorChoice == 3) {
                 graphics.fillStyle = "blue";
             }
-            graphics.fillRect(x-20,y-20,40,40);
-            graphics.strokeRect(x-20,y-20,40,40);
+           else if (colorChoice == 4) {
+                graphics.fillStyle = "purple";
+            }
+            
             
             /*------------------------------------------------------------*/
-            
+
+
+           var numberOfSides = document.getElementById("typeChoice").value;
+            var size = 20;
+        
+        graphics.beginPath();
+        graphics.moveTo (x +  size * Math.cos(0), y +  size *  Math.sin(0));
+        console.log(numberOfSides);
+        for (var i = 1; i <= numberOfSides;i += 1) {
+        graphics.lineTo (x + size * Math.cos(i * 2 * Math.PI / numberOfSides), y + size * Math.sin(i * 2 * Math.PI / numberOfSides));
+        }
+
+        graphics.fill();
+        graphics.lineWidth = 1;
+        graphics.stroke();
+           
             prevX = x;  // update prevX,prevY to prepare for next call to doMouseMove
             prevY = y;
         }
@@ -244,6 +261,8 @@
         graphics.fillStyle = "white";
         graphics.fillRect(0,0,canvas.width,canvas.height);
     }
+
+   function clearbutton(){ graphics.clearRect(0, 0, canvas.width, canvas.height); };
     
 </script>
 <link href="data:text/css,%3Ais(%5Bid*%3D'google_ads_iframe'%5D%2C%5Bid*%3D'taboola-'%5D%2C.taboolaHeight%2C.taboola-placeholder%2C%23credential_picker_container%2C%23credentials-picker-container%2C%23credential_picker_iframe%2C%5Bid*%3D'google-one-tap-iframe'%5D%2C%23google-one-tap-popup-container%2C.google-one-tap-modal-div%2C%23amp_floatingAdDiv%2C%23ez-content-blocker-container)%20%7Bdisplay%3Anone!important%3Bmin-height%3A0!important%3Bheight%3A0!important%3B%7D" rel="stylesheet" type="text/css"></head>
@@ -262,9 +281,20 @@
         <option value="1">Red</option>
         <option value="2">Green</option>
         <option value="3">Blue</option>
+         <option value="4">Purple</option>
     </select>
 </p>
+<p><b>Typ:</b>
+    <select id="typeChoice">
+        <option value="4" selected="selected">Kwadrat</option>
+        <option value="12">12-kat</option>
 
+    </select>
+</p>
+<p>
+<input type="button" onclick="clearbutton()" value="clear" >
+</p>
+   
 <div id="canvasholder">
 <canvas id="canvas" width="800" height="600">
     <!-- This message is shown on the page if the browser doesn't support the canvas element. -->
